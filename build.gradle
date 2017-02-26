@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
+        classpath("mysql:mysql-connector-java:6.0.5")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'java-app-servlet'
+    version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('javax.servlet:javax.servlet-api:3.1.0')
+    compile('javax.servlet.jsp:javax.servlet.jsp-api:2.3.1')
+    compile('javax.servlet:jstl:1.2')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task copyDeps(type: Copy) {
+    from configurations.runtime
+    into 'web/WEB-INF/lib'
+}
